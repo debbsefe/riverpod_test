@@ -5,6 +5,7 @@ final counterProvider = Provider<int>((ref) => 1);
 
 class ProviderSamplePage extends ConsumerWidget {
   const ProviderSamplePage({super.key, required this.title});
+
   final String title;
 
   @override

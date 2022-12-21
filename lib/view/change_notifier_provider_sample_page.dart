@@ -1,16 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final counterStateProvider = StateProvider<int>((ref) => 0);
+final counterChangeNotifierProvider =
+    ChangeNotifierProvider((ref) => ChangeNotifierSampleNotifier());
 
-class StateProviderSamplePage extends ConsumerWidget {
-  const StateProviderSamplePage({super.key, required this.title});
+class ChangeNotifierSampleNotifier extends ChangeNotifier {
+  int count = 0;
+
+  void increment() {
+    count++;
+    notifyListeners();
+  }
+
+  void decrement() {
+    count--;
+    notifyListeners();
+  }
+}
+
+class ChangeNotifierProviderSamplePage extends ConsumerWidget {
+  const ChangeNotifierProviderSamplePage({super.key, required this.title});
 
   final String title;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    int counter = ref.watch(counterStateProvider);
+    int counter = ref.watch(counterChangeNotifierProvider).count;
 
     return Scaffold(
       appBar: AppBar(
@@ -34,14 +49,16 @@ class StateProviderSamplePage extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
-            onPressed: () => ref.read(counterStateProvider.notifier).state++,
+            onPressed: () =>
+                ref.read(counterChangeNotifierProvider.notifier).increment(),
             tooltip: 'Increment',
             heroTag: 1,
             child: const Icon(Icons.add),
           ),
           const SizedBox(width: 12),
           FloatingActionButton(
-            onPressed: () => ref.read(counterStateProvider.notifier).state--,
+            onPressed: () =>
+                ref.read(counterChangeNotifierProvider.notifier).decrement(),
             tooltip: 'Decrement',
             heroTag: 2,
             child: const Icon(Icons.remove),

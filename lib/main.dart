@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_test/view/provider_sample_page.dart';
-import 'package:riverpod_test/view/state_notifier_provider_sample.dart';
-import 'package:riverpod_test/view/state_provider_sample_page.dart';
+import 'package:riverpod_test/view/view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,6 +31,8 @@ class HomePage extends StatelessWidget {
     const providerSamplePage = 'Provider Sample Page';
     const stateProviderSamplePage = 'StateProvider Sample Page';
     const stateNotifierProviderSamplePage = 'StateNotifierProvider Sample Page';
+    const changeNotifierProviderSamplePage =
+        'ChangeNotifierProvider Sample Page';
 
     final pages = [
       const HomeCard(
@@ -51,6 +51,12 @@ class HomePage extends StatelessWidget {
         title: stateNotifierProviderSamplePage,
         page: StateNotifierProviderSamplePage(
           title: stateNotifierProviderSamplePage,
+        ),
+      ),
+      const HomeCard(
+        title: changeNotifierProviderSamplePage,
+        page: ChangeNotifierProviderSamplePage(
+          title: changeNotifierProviderSamplePage,
         ),
       ),
     ];
